@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36" version="26.2.14">
   <diagram name="Page-1" id="taYUtSJ_4CDuhA6wjiIW">
-    <mxGraphModel dx="1668" dy="492" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" adaptiveColors="auto">
+    <mxGraphModel dx="1528" dy="407" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" adaptiveColors="auto">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -272,37 +272,37 @@
         <mxCell id="q4_9x-0cVKSZLk66gTpS-12" value="Is equipped weapon type&lt;div&gt;&amp;nbsp;projectile or melee&lt;/div&gt;" style="rhombus;whiteSpace=wrap;html=1;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="740" y="1080" width="180" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="lq5Zol3VYvwU5_5nPJsw-11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="q4_9x-0cVKSZLk66gTpS-15" target="lq5Zol3VYvwU5_5nPJsw-10">
+        <mxCell id="lq5Zol3VYvwU5_5nPJsw-11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="q4_9x-0cVKSZLk66gTpS-15" target="lq5Zol3VYvwU5_5nPJsw-10" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="q4_9x-0cVKSZLk66gTpS-15" value="If melee, create a slashing object with damage stats from weapon, when enemy touch&amp;nbsp;" style="whiteSpace=wrap;html=1;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="863" y="1230" width="170" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="lq5Zol3VYvwU5_5nPJsw-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="q4_9x-0cVKSZLk66gTpS-17" target="lq5Zol3VYvwU5_5nPJsw-4">
+        <mxCell id="lq5Zol3VYvwU5_5nPJsw-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="q4_9x-0cVKSZLk66gTpS-17" target="lq5Zol3VYvwU5_5nPJsw-4" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="q4_9x-0cVKSZLk66gTpS-17" value="If Projectile, create a projectile with speed stats and damage stats from weapon&amp;nbsp;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="660" y="1230" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="lq5Zol3VYvwU5_5nPJsw-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="q4_9x-0cVKSZLk66gTpS-15" target="q4_9x-0cVKSZLk66gTpS-15">
+        <mxCell id="lq5Zol3VYvwU5_5nPJsw-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="q4_9x-0cVKSZLk66gTpS-15" target="q4_9x-0cVKSZLk66gTpS-15" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="lq5Zol3VYvwU5_5nPJsw-7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="lq5Zol3VYvwU5_5nPJsw-4" target="lq5Zol3VYvwU5_5nPJsw-6">
+        <mxCell id="lq5Zol3VYvwU5_5nPJsw-7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="lq5Zol3VYvwU5_5nPJsw-4" target="lq5Zol3VYvwU5_5nPJsw-6" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="lq5Zol3VYvwU5_5nPJsw-9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="lq5Zol3VYvwU5_5nPJsw-4" target="lq5Zol3VYvwU5_5nPJsw-8">
+        <mxCell id="lq5Zol3VYvwU5_5nPJsw-9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="lq5Zol3VYvwU5_5nPJsw-4" target="lq5Zol3VYvwU5_5nPJsw-8" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="lq5Zol3VYvwU5_5nPJsw-4" value="Did the projectile hit&lt;div&gt;the enemy before a set time&lt;/div&gt;" style="rhombus;whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
+        <mxCell id="lq5Zol3VYvwU5_5nPJsw-4" value="Did the projectile hit&lt;div&gt;the enemy before a set time&lt;/div&gt;" style="rhombus;whiteSpace=wrap;html=1;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="620" y="1320" width="200" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="lq5Zol3VYvwU5_5nPJsw-6" value="Delt damage to enemy health point. Delete projectile" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
+        <mxCell id="lq5Zol3VYvwU5_5nPJsw-6" value="Delt damage to enemy health point. Delete projectile" style="whiteSpace=wrap;html=1;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="659" y="1450" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="lq5Zol3VYvwU5_5nPJsw-8" value="Delete Projectile" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
+        <mxCell id="lq5Zol3VYvwU5_5nPJsw-8" value="Delete Projectile" style="whiteSpace=wrap;html=1;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="813.75" y="1450" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="lq5Zol3VYvwU5_5nPJsw-10" value="" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
+        <mxCell id="lq5Zol3VYvwU5_5nPJsw-10" value="Deal damage" style="whiteSpace=wrap;html=1;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="970" y="1380" width="120" height="60" as="geometry" />
         </mxCell>
       </root>
