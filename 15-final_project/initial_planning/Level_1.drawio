@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36" version="26.2.14">
   <diagram name="Page-1" id="taYUtSJ_4CDuhA6wjiIW">
-    <mxGraphModel dx="1233" dy="230" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" adaptiveColors="auto">
+    <mxGraphModel dx="3815" dy="1783" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" adaptiveColors="auto">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -208,7 +208,7 @@
         <mxCell id="Yp42xmwH9Xkohg9ComGU-18" value="" style="endArrow=none;html=1;rounded=0;fontSize=12;startSize=8;endSize=8;curved=1;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="-305" y="990" as="sourcePoint" />
-            <mxPoint x="1920" y="990" as="targetPoint" />
+            <mxPoint x="2080" y="990" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="Yp42xmwH9Xkohg9ComGU-19" value="" style="endArrow=classic;html=1;rounded=0;fontSize=12;startSize=8;endSize=8;curved=1;" parent="1" edge="1">
@@ -396,7 +396,71 @@
           <mxGeometry x="1580" y="1010" width="245" height="90" as="geometry" />
         </mxCell>
         <mxCell id="MKZqPjybAPE5XbvGpNHw-33" value="Players perform a dash towards the direction they are currently facing" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="1642.5" y="1195" width="120" height="60" as="geometry" />
+          <mxGeometry x="1642.5" y="1140" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="MKZqPjybAPE5XbvGpNHw-37" value="" style="endArrow=classic;html=1;rounded=0;fontSize=12;startSize=8;endSize=8;curved=1;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="2079.41" y="990" as="sourcePoint" />
+            <mxPoint x="2079.41" y="1010" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MKZqPjybAPE5XbvGpNHw-40" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="MKZqPjybAPE5XbvGpNHw-38" target="MKZqPjybAPE5XbvGpNHw-39">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="MKZqPjybAPE5XbvGpNHw-38" value="When player press ability weapon" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1958" y="1010" width="245" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="MKZqPjybAPE5XbvGpNHw-46" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="MKZqPjybAPE5XbvGpNHw-39" target="MKZqPjybAPE5XbvGpNHw-45">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="MKZqPjybAPE5XbvGpNHw-48" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="MKZqPjybAPE5XbvGpNHw-39" target="MKZqPjybAPE5XbvGpNHw-47">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="MKZqPjybAPE5XbvGpNHw-50" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="MKZqPjybAPE5XbvGpNHw-39" target="MKZqPjybAPE5XbvGpNHw-49">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="MKZqPjybAPE5XbvGpNHw-39" value="Check current weapon type" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1958" y="1160" width="245" height="91" as="geometry" />
+        </mxCell>
+        <mxCell id="MKZqPjybAPE5XbvGpNHw-55" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="MKZqPjybAPE5XbvGpNHw-45" target="MKZqPjybAPE5XbvGpNHw-54">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="MKZqPjybAPE5XbvGpNHw-45" value="Increase fire speed for X amount of sec" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1860" y="1390" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="MKZqPjybAPE5XbvGpNHw-57" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="MKZqPjybAPE5XbvGpNHw-47">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="2080.5" y="1530" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MKZqPjybAPE5XbvGpNHw-47" value="Reduce reload speed for X amount of sec" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="2020.5" y="1390" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="MKZqPjybAPE5XbvGpNHw-59" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="MKZqPjybAPE5XbvGpNHw-49">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="2240.000000000001" y="1530" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MKZqPjybAPE5XbvGpNHw-49" value="Increase damage and range of weapon for X amount of sec" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="2180" y="1390" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="MKZqPjybAPE5XbvGpNHw-51" value="Handgun" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1920" y="1340" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="MKZqPjybAPE5XbvGpNHw-52" value="AR" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="2065" y="1340" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="MKZqPjybAPE5XbvGpNHw-53" value="Melee" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="2230" y="1340" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="MKZqPjybAPE5XbvGpNHw-54" value="Start Cooldown Timer for X amount of sec" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1860" y="1530" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="MKZqPjybAPE5XbvGpNHw-60" value="Start Cooldown Timer for X amount of sec" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="2020.5" y="1530" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="MKZqPjybAPE5XbvGpNHw-61" value="Start Cooldown Timer for X amount of sec" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="2180" y="1530" width="120" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
