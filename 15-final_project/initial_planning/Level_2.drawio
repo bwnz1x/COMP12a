@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36" version="27.0.1">
   <diagram name="Page-1" id="taYUtSJ_4CDuhA6wjiIW">
-    <mxGraphModel dx="2333" dy="891" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" adaptiveColors="auto">
+    <mxGraphModel dx="4803" dy="2377" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" adaptiveColors="auto">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -438,26 +438,26 @@
         <mxCell id="G85wXIseEYkvYdd_f73J-6" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=light-dark(#FFFFFF,#FF3333);" vertex="1" parent="1">
           <mxGeometry x="-585" y="560" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="G85wXIseEYkvYdd_f73J-8" value="&lt;div&gt;Enemy&lt;/div&gt;TIER 1" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+        <mxCell id="G85wXIseEYkvYdd_f73J-8" value="&lt;div&gt;Enemy&lt;/div&gt;TIER 1&lt;div&gt;- Melee&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="-595" y="600" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="G85wXIseEYkvYdd_f73J-9" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=light-dark(#FFFFFF,#FF3333);" vertex="1" parent="1">
           <mxGeometry x="-335" y="610" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="G85wXIseEYkvYdd_f73J-10" value="Enemy" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="-345" y="650" width="60" height="30" as="geometry" />
+        <mxCell id="G85wXIseEYkvYdd_f73J-10" value="Enemy&lt;div&gt;Tier 1 -&amp;nbsp;&lt;/div&gt;&lt;div&gt;Ranger&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-345" y="660" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="G85wXIseEYkvYdd_f73J-11" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=light-dark(#FFFFFF,#FF3333);" vertex="1" parent="1">
           <mxGeometry x="-540" y="720" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="G85wXIseEYkvYdd_f73J-12" value="Enemy" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="-550" y="760" width="60" height="30" as="geometry" />
+        <mxCell id="G85wXIseEYkvYdd_f73J-12" value="Enemy&lt;div&gt;Tier 1 - Ranger&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-550" y="770" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="G85wXIseEYkvYdd_f73J-13" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=light-dark(#FFFFFF,#FF3333);" vertex="1" parent="1">
           <mxGeometry x="-375" y="490" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="G85wXIseEYkvYdd_f73J-14" value="Enemy&lt;div&gt;TIER 1&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="-385" y="530" width="60" height="30" as="geometry" />
+        <mxCell id="G85wXIseEYkvYdd_f73J-14" value="Enemy&lt;div&gt;TIER 1 -&lt;/div&gt;&lt;div&gt;Melee&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-385" y="540" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="G85wXIseEYkvYdd_f73J-15" value="Reward&lt;div&gt;chest&lt;/div&gt;" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="-480" y="840" width="80" height="40" as="geometry" />
@@ -488,6 +488,24 @@
         </mxCell>
         <mxCell id="G85wXIseEYkvYdd_f73J-21" value="&amp;nbsp;DOOR" style="rounded=0;whiteSpace=wrap;html=1;rotation=0;direction=west;" vertex="1" parent="1">
           <mxGeometry x="-25" y="500" width="105" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="G85wXIseEYkvYdd_f73J-23" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=light-dark(#FFFFFF,#FF3333);" vertex="1" parent="1">
+          <mxGeometry x="191" y="570" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="G85wXIseEYkvYdd_f73J-24" value="Enemy&lt;div&gt;Tier 1 -&amp;nbsp;&lt;/div&gt;&lt;div&gt;Ranger&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="181" y="620" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="G85wXIseEYkvYdd_f73J-25" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=light-dark(#FFFFFF,#FF3333);" vertex="1" parent="1">
+          <mxGeometry x="-140" y="590" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="G85wXIseEYkvYdd_f73J-26" value="Enemy&lt;div&gt;Tier 1 -&amp;nbsp;&lt;/div&gt;&lt;div&gt;Ranger&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-150" y="640" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="G85wXIseEYkvYdd_f73J-27" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=light-dark(#FFFFFF,#FFFF00);" vertex="1" parent="1">
+          <mxGeometry x="35" y="750" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="G85wXIseEYkvYdd_f73J-28" value="Enemy&lt;div&gt;Tier 2 -&amp;nbsp;&lt;/div&gt;&lt;div&gt;Melee&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="35" y="820" width="60" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
