@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36" version="27.0.2">
   <diagram name="Page-1" id="taYUtSJ_4CDuhA6wjiIW">
-    <mxGraphModel dx="2431" dy="951" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" adaptiveColors="auto">
+    <mxGraphModel dx="2168" dy="792" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" adaptiveColors="auto">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -507,29 +507,62 @@
         <mxCell id="G85wXIseEYkvYdd_f73J-28" value="Enemy&lt;div&gt;Tier 2 -&amp;nbsp;&lt;/div&gt;&lt;div&gt;Melee&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="35" y="820" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="XtfZm6S3y1u6sykADi6S-2" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1">
+        <mxCell id="XtfZm6S3y1u6sykADi6S-2" value="" style="endArrow=none;html=1;rounded=0;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="302.25" y="520" as="sourcePoint" />
             <mxPoint x="302" y="110" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="XtfZm6S3y1u6sykADi6S-3" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=light-dark(#FFFFFF,#FFFF00);" vertex="1" parent="1">
+        <mxCell id="XtfZm6S3y1u6sykADi6S-3" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=light-dark(#FFFFFF,#FFFF00);" parent="1" vertex="1">
           <mxGeometry x="-145" y="230" width="60" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="XtfZm6S3y1u6sykADi6S-4" value="Enemy&lt;div&gt;Tier 2 -&amp;nbsp;&lt;/div&gt;&lt;div&gt;Melee&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+        <mxCell id="XtfZm6S3y1u6sykADi6S-4" value="Enemy&lt;div&gt;Tier 2 -&amp;nbsp;&lt;/div&gt;&lt;div&gt;Melee&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="-145" y="300" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="XtfZm6S3y1u6sykADi6S-5" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=light-dark(#FFFFFF,#FFFF00);" vertex="1" parent="1">
+        <mxCell id="XtfZm6S3y1u6sykADi6S-5" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=light-dark(#FFFFFF,#FFFF00);" parent="1" vertex="1">
           <mxGeometry x="154.07" y="230" width="60" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="XtfZm6S3y1u6sykADi6S-6" value="Enemy&lt;div&gt;Tier 2 -&amp;nbsp;&lt;/div&gt;&lt;div&gt;Ranger&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+        <mxCell id="XtfZm6S3y1u6sykADi6S-6" value="Enemy&lt;div&gt;Tier 2 -&amp;nbsp;&lt;/div&gt;&lt;div&gt;Ranger&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="154.07" y="300" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="XtfZm6S3y1u6sykADi6S-7" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=light-dark(#FFFFFF,#99004D);" vertex="1" parent="1">
+        <mxCell id="XtfZm6S3y1u6sykADi6S-7" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=light-dark(#FFFFFF,#99004D);" parent="1" vertex="1">
           <mxGeometry x="750" y="460" width="60" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="XtfZm6S3y1u6sykADi6S-8" value="Enemy&lt;div&gt;Tier 3&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+        <mxCell id="XtfZm6S3y1u6sykADi6S-8" value="Enemy&lt;div&gt;Tier 3&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="750" y="530" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="i7hB4-bsWyCeOYq-jbDJ-1" value="" style="endArrow=none;html=1;rounded=0;fontSize=12;startSize=8;endSize=8;curved=1;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-285" y="1450" as="sourcePoint" />
+            <mxPoint x="2700" y="1450" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="i7hB4-bsWyCeOYq-jbDJ-2" value="" style="endArrow=none;html=1;rounded=0;fontSize=12;startSize=8;endSize=8;curved=1;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-285" y="1450" as="sourcePoint" />
+            <mxPoint x="2800" y="1450" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="i7hB4-bsWyCeOYq-jbDJ-3" value="" style="endArrow=classic;html=1;rounded=0;fontSize=12;startSize=8;endSize=8;curved=1;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="2480.41" y="1450" as="sourcePoint" />
+            <mxPoint x="2480.41" y="1470" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="i7hB4-bsWyCeOYq-jbDJ-6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="i7hB4-bsWyCeOYq-jbDJ-4" target="i7hB4-bsWyCeOYq-jbDJ-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="i7hB4-bsWyCeOYq-jbDJ-4" value="When player enters a new room" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="2358" y="1470" width="245" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="i7hB4-bsWyCeOYq-jbDJ-8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="i7hB4-bsWyCeOYq-jbDJ-5" target="i7hB4-bsWyCeOYq-jbDJ-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="i7hB4-bsWyCeOYq-jbDJ-5" value="Force player to be in that room until all enemies are eliminated" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="2420.5" y="1580" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="i7hB4-bsWyCeOYq-jbDJ-7" value="Door to the next room are unable to unlock till the prior requirements are fufilled" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="2415.25" y="1665" width="130.5" height="80" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
