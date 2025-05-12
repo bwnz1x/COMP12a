@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36" version="27.0.2">
   <diagram name="Page-1" id="taYUtSJ_4CDuhA6wjiIW">
-    <mxGraphModel dx="1526" dy="407" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" adaptiveColors="auto">
+    <mxGraphModel dx="2427" dy="951" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" adaptiveColors="auto">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -608,6 +608,9 @@
         <mxCell id="i7hB4-bsWyCeOYq-jbDJ-13" value="Display pause screen&lt;div&gt;with option&amp;nbsp;&lt;/div&gt;" style="whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="2708.74" y="1708" width="120" height="60" as="geometry" />
         </mxCell>
+        <mxCell id="sP7tC8DH-ycPfbjM61ny-35" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="i7hB4-bsWyCeOYq-jbDJ-16" target="sP7tC8DH-ycPfbjM61ny-34">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
         <mxCell id="i7hB4-bsWyCeOYq-jbDJ-16" value="When Player pressed&lt;div&gt;&amp;nbsp;resume button or ESC&amp;nbsp;&lt;/div&gt;" style="rhombus;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="2499" y="1837" width="159.5" height="70" as="geometry" />
         </mxCell>
@@ -727,9 +730,6 @@
             <mxPoint x="3420" y="1800" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="sP7tC8DH-ycPfbjM61ny-33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="sP7tC8DH-ycPfbjM61ny-28" target="sP7tC8DH-ycPfbjM61ny-32">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
         <mxCell id="sP7tC8DH-ycPfbjM61ny-28" value="Enemy begin to fire projectile. Depending on tier, attacks will be easier/harder to dodge" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="3355" y="1800" width="129.99" height="70" as="geometry" />
         </mxCell>
@@ -739,8 +739,14 @@
         <mxCell id="sP7tC8DH-ycPfbjM61ny-30" value="Swing attacks at players(EXP: a sword spinning around enemy with x second for Tier 1)" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="3177.01" y="1900" width="150" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="sP7tC8DH-ycPfbjM61ny-32" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="3347.99" y="1899" width="144" height="80" as="geometry" />
+        <mxCell id="sP7tC8DH-ycPfbjM61ny-37" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="sP7tC8DH-ycPfbjM61ny-34" target="sP7tC8DH-ycPfbjM61ny-36">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sP7tC8DH-ycPfbjM61ny-34" value="Unfreeze game" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="2518.75" y="1947" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="sP7tC8DH-ycPfbjM61ny-36" value="Return to normal gameplay" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="2518.75" y="2087" width="120" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
