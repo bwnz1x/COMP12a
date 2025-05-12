@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36" version="27.0.2">
   <diagram name="Page-1" id="taYUtSJ_4CDuhA6wjiIW">
-    <mxGraphModel dx="1125" dy="166" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" adaptiveColors="auto">
+    <mxGraphModel dx="1526" dy="407" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" adaptiveColors="auto">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -733,8 +733,8 @@
         <mxCell id="sP7tC8DH-ycPfbjM61ny-29" value="Projectile" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="3345.87" y="1759" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="sP7tC8DH-ycPfbjM61ny-30" value="Swing attacks at players(a sword spinning around enemy with x second)" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="3179.995" y="1900" width="120" height="60" as="geometry" />
+        <mxCell id="sP7tC8DH-ycPfbjM61ny-30" value="Swing attacks at players(EXP: a sword spinning around enemy with x second for Tier 1)" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="3177.01" y="1900" width="150" height="80" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
