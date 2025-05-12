@@ -727,6 +727,9 @@
             <mxPoint x="3420" y="1800" as="targetPoint" />
           </mxGeometry>
         </mxCell>
+        <mxCell id="sP7tC8DH-ycPfbjM61ny-33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="sP7tC8DH-ycPfbjM61ny-28" target="sP7tC8DH-ycPfbjM61ny-32">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
         <mxCell id="sP7tC8DH-ycPfbjM61ny-28" value="Enemy begin to fire projectile. Depending on tier, attacks will be easier/harder to dodge" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="3355" y="1800" width="129.99" height="70" as="geometry" />
         </mxCell>
@@ -735,6 +738,9 @@
         </mxCell>
         <mxCell id="sP7tC8DH-ycPfbjM61ny-30" value="Swing attacks at players(EXP: a sword spinning around enemy with x second for Tier 1)" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="3177.01" y="1900" width="150" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="sP7tC8DH-ycPfbjM61ny-32" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="3347.99" y="1899" width="144" height="80" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
