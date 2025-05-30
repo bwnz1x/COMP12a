@@ -3,9 +3,21 @@ Ben's Final Project Plan
 Summary: 
 A hack and slash game with a choice between melee and projectile weapons. 
 Objective is to go through each level until the final level, where the final boss is.
+
 Different type of monster on each level.
 Different character with different weapons, abilites.
-Top Down Style: something similar to Vampire Survivor, HoloCure, Soul Knight
+Top Down Style: something similar to Vampire Survivor, Soul Knight, HoloCure
+ENEMIES TYPE: melee fighters, mages(projectiles/aoe attck), Bosses(Combination of melee and projectile)
+PLAYERS WEAPON TYPE: MELEE(Sword), PISTOL(single shot), ASSUALT RIFLES(Full-Auto)
+HP/MP System:
+- Player will have an amount of set HP. HP is lowered by enemies attacks.
+- When HP is 0, Players dies and respawn at the last checkpoint/spawn point on that level. Reset HP
+- Starts with 100 HP. Increase by Upgrades
+
+- MP is used for dodge(to stop spamming dodge) and abilities
+- Starts with 100 MP. Increase by Upgrades
+- Dodge will have i-frames(invulnerable) 
+
 Feature to be included: 
     Store: Cosmetic, Upgrades
     Diffculty selection: Easy to Expert, changing AI Diffculty (changing HP/DMG to player)
@@ -18,7 +30,9 @@ Feature to be included:
 
 Controls:
 Movement : WASD
-Fire/Melee : LMB
-Dodge/Dash: RMB
+Fire/Melee* : LMB
+Dodge/Dash*: RMB
 Abilities : E
 Interact : F
+
+*depends on current weapon
