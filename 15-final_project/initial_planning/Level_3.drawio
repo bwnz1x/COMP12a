@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36" version="27.1.1">
   <diagram name="Page-1" id="taYUtSJ_4CDuhA6wjiIW">
-    <mxGraphModel dx="2430" dy="2020" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" adaptiveColors="auto">
+    <mxGraphModel dx="2151" dy="1858" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" adaptiveColors="auto">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -362,6 +362,9 @@
         </mxCell>
         <mxCell id="MKZqPjybAPE5XbvGpNHw-53" value="Melee" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="2250" y="1800" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="_PuXTlX4eswYH-ud0qcQ-4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="MKZqPjybAPE5XbvGpNHw-54" target="_PuXTlX4eswYH-ud0qcQ-3">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="MKZqPjybAPE5XbvGpNHw-54" value="Start Cooldown Timer for X amount of sec" style="whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="1880" y="1990" width="120" height="60" as="geometry" />
@@ -891,6 +894,25 @@
         </mxCell>
         <mxCell id="_PuXTlX4eswYH-ud0qcQ-1" value="Reduce MP by 20" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="1662.5" y="1740" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="_PuXTlX4eswYH-ud0qcQ-3" value="Reduce MP by 20" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1880" y="2130" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="_PuXTlX4eswYH-ud0qcQ-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" target="_PuXTlX4eswYH-ud0qcQ-6">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="2100.5" y="2050" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_PuXTlX4eswYH-ud0qcQ-6" value="Reduce MP by 20" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="2040.5" y="2130" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="_PuXTlX4eswYH-ud0qcQ-7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" target="_PuXTlX4eswYH-ud0qcQ-8">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="2260" y="2050" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_PuXTlX4eswYH-ud0qcQ-8" value="Reduce MP by 20" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="2200" y="2130" width="120" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
