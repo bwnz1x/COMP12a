@@ -13,10 +13,20 @@ HP/MP System:
 - Player will have an amount of set HP. HP is lowered by enemies attacks.
 - When HP is 0, Players dies and respawn at the last checkpoint/spawn point on that level. Reset HP
 - Starts with 100 HP. Increase by Upgrades
+- HP refilled with hp stations along the levels
 
 - MP is used for dodge(to stop spamming dodge) and abilities
 - Starts with 100 MP. Increase by Upgrades
+- MP will be refilled over time
+
 - Dodge will have i-frames(invulnerable) 
+- Dodge will use 20 MP per
+ABILITy:
+- Different abilities for class. 
+- They are mainly damage boost (in ways like boosting reload speed, fire speed, or straight up increase damage)
+- Use 20 MP
+
+
 
 Feature to be included: 
     Store: Cosmetic, Upgrades
