@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36" version="27.1.1">
   <diagram name="Page-1" id="taYUtSJ_4CDuhA6wjiIW">
-    <mxGraphModel dx="8223" dy="4293" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" adaptiveColors="auto">
+    <mxGraphModel dx="2151" dy="758" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" adaptiveColors="auto">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -626,7 +626,13 @@
         <mxCell id="wr4I21qXE2OK-taXbtrC-152" value="Reduce MP by 20" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="2280" y="2170" width="120" height="60" as="geometry" />
         </mxCell>
+        <mxCell id="wr4I21qXE2OK-taXbtrC-154" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="wr4I21qXE2OK-taXbtrC-153" target="wr4I21qXE2OK-taXbtrC-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
         <mxCell id="wr4I21qXE2OK-taXbtrC-153" value="Player Spawn in to map" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-265" y="1258.45" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wr4I21qXE2OK-taXbtrC-155" value="Map Load&lt;div&gt;(load map and enemies)&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="-265" y="1330" width="120" height="60" as="geometry" />
         </mxCell>
       </root>
