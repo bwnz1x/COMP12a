@@ -1,22 +1,42 @@
 import arcade
+from pyglet.math import Vec2
 
 #CONSTANTS
 ScreenWidth = 900
 ScreenHeight = 720
 PlayerSpeed = 5
-
+tile_size = 32
 
 
 class Game(arcade.Window):
     def __init__(self):
         super().__init__(ScreenWidth, ScreenHeight, "Game Window")
-        arcade.set_background_color(arcade.color.BLACK)
+        arcade.set_background_color(arcade.color.GREEN)
         self.set_mouse_visible(False)
+
+        self.player_list = None
+        self.player_sprite = None
+        self.wall_list = None
+        self.title_list
+
+        self.camera_sprites = arcade.Camera(ScreenWidth, ScreenHeight)
+        self.camera_gui = arcade.Camera(ScreenWidth, ScreenHeight)
 
     def setup(self):
         """LOAD MAPS AND SPRITES"""
-        pass    
+        map = arcade.load_tilemap("", tile_size=tile_size)
 
+        self.player_list = arcade.SpriteList()
+        self.wall_list = arcade.SpriteList()
+        self.title_list = arcade.SpriteList()
+
+        # Load player sprite
+        self.player_sprite = arcade.Sprite("tileset/sprite.png", scale=1)
+        self.player_sprite.center_x = ScreenWidth // 2
+        self.player_sprite.center_y = ScreenHeight // 2
+        self.player_list.append(self.player_sprite)
+
+        
 
 class monster_melee(hp, atk, atk_speed):
     def __init__(self, hp, atk, atk_speed):
@@ -28,7 +48,11 @@ class monster_melee(hp, atk, atk_speed):
         """ 
         Find where the player with LOS, walk towards them, and attack.
         Attack by getting the player within range and dealing damage after a delay. If the player is not within range, walk towards them.
+
         """
+        # get player position
+        # get enemy self position
+        
         pass
 
     
