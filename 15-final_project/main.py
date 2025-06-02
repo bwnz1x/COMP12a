@@ -8,6 +8,7 @@ PlayerSpeed = 5
 tile_size = 32
 
 
+
 class Game(arcade.Window):
     def __init__(self):
         super().__init__(ScreenWidth, ScreenHeight, "Game Window")
@@ -60,6 +61,7 @@ class Game(arcade.Window):
 
         # Handle player movement
         self.handle_player_movement()
+        
 
     def on_key_press(self, key, modifiers):
         """Called when a key is pressed."""
