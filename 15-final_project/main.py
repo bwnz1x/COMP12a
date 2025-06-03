@@ -8,11 +8,10 @@ PlayerSpeed = 5
 tile_size = 32
 
 
-
 class Game(arcade.Window):
     def __init__(self):
         super().__init__(ScreenWidth, ScreenHeight, "Game Window")
-        arcade.set_background_color(arcade.color.GREEN)
+        arcade.set_background_color(arcade.color.DARK_GREEN)
         self.set_mouse_visible(False)
 
         self.player_list = None
@@ -54,6 +53,11 @@ class Game(arcade.Window):
         # Draw GUI
         self.camera_gui.use()
         arcade.draw_text("Player Position: " + str(self.player_sprite.position), 10, 10, arcade.color.WHITE, 12)
+
+      # Line of Sight (LOS) check
+        los = arcade.has_line_of_sight((self.player_sprite.center_x, self.player_sprite.center_y),(450, 470), self.wall_list)
+        arcade.draw_text(f"LOS: {los}", 10, 30, arcade.color.WHITE, 12)  
+
     def on_update(self, delta_time):
         """UPDATE EVERYTHING"""
         self.player_list.update()
@@ -61,7 +65,6 @@ class Game(arcade.Window):
 
         # Handle player movement
         self.handle_player_movement()
-        
 
     def on_key_press(self, key, modifiers):
         """Called when a key is pressed."""
