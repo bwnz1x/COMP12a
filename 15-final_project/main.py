@@ -65,7 +65,7 @@ class Game(arcade.Window):
         # Draw GUI
         self.camera_gui.use()
         arcade.draw_text("Player Position: " + str(self.player_sprite.position), 10, 10, arcade.color.WHITE, 12)
-
+        arcade.draw_text(f"Player HP: {self.player_sprite.hp}", 10, 50, arcade.color.WHITE, 12)
       # Line of Sight (LOS) check
         los = arcade.has_line_of_sight((self.player_sprite.center_x, self.player_sprite.center_y),(450, 470), self.wall_list)
         arcade.draw_text(f"LOS: {los}", 10, 30, arcade.color.WHITE, 12) 
@@ -112,11 +112,12 @@ class Game(arcade.Window):
 
 
 class monster_melee:
-    def __init__(self, hp, atk, atk_speed):
-        self.hp = hp
-        self.atk = atk
-        self.atk_speed = atk_speed
-
+    def __init__(self, hp, atk, atk_speed, spawn_x, spwan_y):
+        self.hp = None
+        self.atk = None
+        self.atk_speed = None
+        self.spawn_x = None
+        self.spawn_y = None
     def attack(self):
         """ 
         Find where the player with LOS, walk towards them, and attack.
