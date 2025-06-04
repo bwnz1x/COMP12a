@@ -4,8 +4,18 @@ from pyglet.math import Vec2
 #CONSTANTS
 ScreenWidth = 900
 ScreenHeight = 720
-PlayerSpeed = 5
 tile_size = 32
+CameraSpeed = 0.1
+
+# class for processing player sprite
+class Player(arcade.Sprite):
+    def __init__(self, image, scale, hp, atk,spd):
+        super().__init__(image, scale)
+        self.hp = hp
+        self.atk = atk
+        self.spd = spd
+
+
 
 
 class Game(arcade.Window):
@@ -38,10 +48,12 @@ class Game(arcade.Window):
         self.player_list = arcade.SpriteList()
 
         # Load player sprite
-        self.player_sprite = arcade.Sprite("tileset/character.png", scale=1)
+        self.player_sprite = Player("tileset/character.png", scale=1, hp=100, atk=10, spd=5)
         self.player_sprite.center_x = ScreenWidth // 2
         self.player_sprite.center_y = ScreenHeight // 2
         self.player_list.append(self.player_sprite)
+
+        self.physics_engine = arcade.PhysicsEngineSimple(self.player_sprite, self.wall_list)
 
     def on_draw(self):
         """DRAW EVERYTHING"""
@@ -56,8 +68,8 @@ class Game(arcade.Window):
 
       # Line of Sight (LOS) check
         los = arcade.has_line_of_sight((self.player_sprite.center_x, self.player_sprite.center_y),(450, 470), self.wall_list)
-        arcade.draw_text(f"LOS: {los}", 10, 30, arcade.color.WHITE, 12)  
-
+        arcade.draw_text(f"LOS: {los}", 10, 30, arcade.color.WHITE, 12) 
+      
     def on_update(self, delta_time):
         """UPDATE EVERYTHING"""
         self.player_list.update()
@@ -65,7 +77,15 @@ class Game(arcade.Window):
 
         # Handle player movement
         self.handle_player_movement()
+        # Update the camera to follow the player
+        self.physics_engine.update()
+        self.scroll_to_player()
 
+    def scroll_to_player(self):
+        position = Vec2(self.player_sprite.center_x - self.width / 2,
+                        self.player_sprite.center_y - self.height / 2)
+        self.camera_sprites.move_to(position, CameraSpeed)
+# movement here
     def on_key_press(self, key, modifiers):
         """Called when a key is pressed."""
         self.pressed_keys.add(key)
@@ -77,36 +97,53 @@ class Game(arcade.Window):
     def handle_player_movement(self):
         """Handle player movement based on key presses."""
         if arcade.key.LEFT in self.pressed_keys:
-            self.player_sprite.change_x = -PlayerSpeed
+            self.player_sprite.change_x = self.player_sprite.spd * -1
         elif arcade.key.RIGHT in self.pressed_keys:
-            self.player_sprite.change_x = PlayerSpeed
+            self.player_sprite.change_x = self.player_sprite.spd
         else:
             self.player_sprite.change_x = 0
 
         if arcade.key.UP in self.pressed_keys:
-            self.player_sprite.change_y = PlayerSpeed
+            self.player_sprite.change_y = self.player_sprite.spd
         elif arcade.key.DOWN in self.pressed_keys:
-            self.player_sprite.change_y = -PlayerSpeed
+            self.player_sprite.change_y = self.player_sprite.spd * -1
         else:
             self.player_sprite.change_y = 0
 
 
-# # class monster_melee(hp, atk, atk_speed):
-#     def __init__(self, hp, atk, atk_speed):
-#         self.hp = hp
-#         self.atk = atk
-#         self.atk_speed = atk_speed
+class monster_melee:
+    def __init__(self, hp, atk, atk_speed):
+        self.hp = hp
+        self.atk = atk
+        self.atk_speed = atk_speed
 
-#     def attack(self):
-#         """ 
-#         Find where the player with LOS, walk towards them, and attack.
-#         Attack by getting the player within range and dealing damage after a delay. If the player is not within range, walk towards them.
+    def attack(self):
+        """ 
+        Find where the player with LOS, walk towards them, and attack.
+        Attack by getting the player within range and dealing damage after a delay. If the player is not within range, walk towards them.
 
-#         """
-#         # get player position
-#         # get enemy self position
+        """
+        # get player position
+        # get enemy self position
+        los_check = arcade.has_line_of_sight(
+            (self.player_sprite.center_x, self.player_sprite.center_y),
+            (self.enemy_sprite.center_x, self.enemy_sprite.center_y),
+            self.wall_list
+        )
+        if los_check:
+            # Walk towards the player
+            direction = Vec2(
+                self.player_sprite.center_x - self.enemy_sprite.center_x,
+                self.player_sprite.center_y - self.enemy_sprite.center_y
+            ).normalize()
+            self.enemy_sprite.change_x = direction.x * self.atk_speed
+            self.enemy_sprite.change_y = direction.y * self.atk_speed
         
-#         pass
+            # Check if within attack range
+            distance = self.enemy_sprite.distance_to(self.player_sprite)
+            if distance <= 15:
+                # attack the player
+                self.player_sprite.hp -= self.atk
 
     
 # # class monster_ranged(hp, atk, projectile_speed):
