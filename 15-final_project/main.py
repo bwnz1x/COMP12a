@@ -1,6 +1,7 @@
 # import libraries
 import arcade
 from pyglet.math import Vec2
+import math
 
 #CONSTANTS
 ScreenWidth = 900
@@ -49,10 +50,16 @@ class Game(arcade.Window):
         self.player_list = arcade.SpriteList()
 
         # Load player sprite
-        self.player_sprite = Player("tileset/character.png", scale=1, hp=100, atk=10, spd=5)
+        self.player_sprite = Player("tileset/character.png", scale=1, hp=100, atk=10, spd=2)
         self.player_sprite.center_x = ScreenWidth // 2
         self.player_sprite.center_y = ScreenHeight // 2
         self.player_list.append(self.player_sprite)
+
+        # test enemy sprite
+        # Dynamically set spawn points for the monster
+        spawn_x, spawn_y = 300, 400  # Example spawn location
+        self.enemy1_sprite = monster_melee("tileset/enemy1.png", scale=1, hp=100, atk=10, atk_speed=3, spawn_x=spawn_x, spawn_y=spawn_y)
+        self.player_list.append(self.enemy1_sprite)
 
         self.physics_engine = arcade.PhysicsEngineSimple(self.player_sprite, self.wall_list)
 
@@ -62,6 +69,7 @@ class Game(arcade.Window):
         self.camera_sprites.use()
         self.wall_list.draw()
         self.player_list.draw()
+        self.enemy1_sprite.draw()
 
         # Draw GUI
         self.camera_gui.use()
@@ -76,8 +84,12 @@ class Game(arcade.Window):
         self.player_list.update()
         self.player_sprite.update()
 
+        # Call the monster's attack method
+        self.enemy1_sprite.check_line_of_sight(self.player_sprite, self.wall_list)
+
         # Handle player movement
         self.handle_player_movement()
+
         # Update the camera to follow the player
         self.physics_engine.update()
         self.scroll_to_player()
@@ -112,40 +124,46 @@ class Game(arcade.Window):
             self.player_sprite.change_y = 0
 
 
-class monster_melee:
-    def __init__(self, hp, atk, atk_speed, spawn_x, spwan_y):
-        self.hp = None
-        self.atk = None
-        self.atk_speed = None
-        self.spawn_x = None
-        self.spawn_y = None
-    def attack(self):
-        """ 
-        Find where the player with LOS, walk towards them, and attack.
-        Attack by getting the player within range and dealing damage after a delay. If the player is not within range, walk towards them.
+class monster_melee(arcade.Sprite):
+    def __init__(self, image, scale, hp, atk, atk_speed, spawn_x, spawn_y):
+        super().__init__(image, scale)
+        self.hp = hp
+        self.atk = atk
+        self.atk_speed = atk_speed
+        self.center_x = spawn_x
+        self.center_y = spawn_y
 
-        """
-        # get player position
-        # get enemy self position
+    def check_line_of_sight(self, player_sprite, wall_list):
         los_check = arcade.has_line_of_sight(
-            (self.player_sprite.center_x, self.player_sprite.center_y),
-            (self.enemy_sprite.center_x, self.enemy_sprite.center_y),
-            self.wall_list
+            (self.center_x, self.center_y),
+            (player_sprite.center_x, player_sprite.center_y),
+            wall_list
         )
         if los_check:
-            # Walk towards the player
-            direction = Vec2(
-                self.player_sprite.center_x - self.enemy_sprite.center_x,
-                self.player_sprite.center_y - self.enemy_sprite.center_y
-            ).normalize()
-            self.enemy_sprite.change_x = direction.x * self.atk_speed
-            self.enemy_sprite.change_y = direction.y * self.atk_speed
-        
-            # Check if within attack range
-            distance = self.enemy_sprite.distance_to(self.player_sprite)
-            if distance <= 15:
-                # attack the player
-                self.player_sprite.hp -= self.atk
+            self.attack(player_sprite)  # Pass player_sprite to attack
+        else:
+            # Stop the monster's movement when LOS is lost
+            self.change_x = 0
+            self.change_y = 0
+
+    def attack(self, player_sprite):
+        """
+        Find where the player is, walk towards them, and attack.
+        """
+        # Walk towards the player
+        direction = Vec2(
+            player_sprite.center_x - self.center_x,
+            player_sprite.center_y - self.center_y).normalize()
+        self.change_x = direction.x * self.atk_speed
+        self.change_y = direction.y * self.atk_speed
+
+        # Check if within attack range
+        distance = math.sqrt(
+            (self.center_x - player_sprite.center_x) ** 2 +
+            (self.center_y - player_sprite.center_y) ** 2)
+        if distance <= 15:
+            # Attack the player
+            player_sprite.hp -= self.atk
 
     
 # # class monster_ranged(hp, atk, projectile_speed):
