@@ -58,7 +58,7 @@ class Game(arcade.Window):
         # test enemy sprite
         # Dynamically set spawn points for the monster
         spawn_x, spawn_y = 300, 400  # Example spawn location
-        self.enemy1_sprite = monster_melee("tileset/enemy1.png", scale=1, hp=100, atk=10, atk_speed=3, spawn_x=spawn_x, spawn_y=spawn_y)
+        self.enemy1_sprite = monster_melee("tileset/enemy1.png", scale=1, hp=100, atk=10, atk_speed=1.8, spawn_x=spawn_x, spawn_y=spawn_y)
         self.player_list.append(self.enemy1_sprite)
 
         self.physics_engine = arcade.PhysicsEngineSimple(self.player_sprite, self.wall_list)
