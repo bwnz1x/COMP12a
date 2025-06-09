@@ -102,7 +102,7 @@ class Game(arcade.Window):
             arcade.draw_rectangle_filled(
                 ScreenWidth // 2, ScreenHeight // 2,
                 ScreenWidth, ScreenHeight,
-                (0, 0, 0, 150)  # Black with 150 alpha for transparency
+                (0, 0, 0, 150)
             )
             arcade.draw_text("PAUSED", ScreenWidth // 2 - 50, ScreenHeight // 2, arcade.color.WHITE, 24)
             arcade.draw_text("Press ESC to Resume", ScreenWidth // 2 - 100, ScreenHeight // 2 - 40, arcade.color.WHITE, 18)
