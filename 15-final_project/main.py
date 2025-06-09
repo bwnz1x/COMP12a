@@ -4,7 +4,7 @@ from pyglet.math import Vec2
 import math
 
 #CONSTANTS
-ScreenWidth = 900
+ScreenWidth = 1280
 ScreenHeight = 720
 tile_size = 32
 CameraSpeed = 0.1
@@ -16,7 +16,20 @@ class Player(arcade.Sprite):
         self.hp = hp
         self.atk = atk
         self.spd = spd
+    
+    def player_gun(self):
+        """ Player main weapon, a gun that shoots bullets."""
+        # TODO: Have gun creates bullets that shoot towards mouse diretion
 
+        pass
+    def player_melee(self):
+        """If there is an enemy in range, attack with melee weapon."""
+        # check if there is an enemy in range
+        # if arcade.check_for_collision_with_list(self, self.enemy_list):
+        pass
+    def player_gernade(self):
+        """Press a key to throw a grenade."""
+        pass
 
 
 
@@ -27,6 +40,7 @@ class Game(arcade.Window):
         self.set_mouse_visible(False)
 
         self.player_list = None
+        self.enemy_list = None
         self.player_sprite = None
         self.wall_list = None
         self.title_list = None
@@ -37,28 +51,30 @@ class Game(arcade.Window):
 
         # Add a set to track pressed keys
         self.pressed_keys = set()
+        self.paused = False  # Track pause state
 
     def setup(self):
         """LOAD MAPS AND SPRITES"""
 
         # Load the tile map first
-        self.title_map = arcade.load_tilemap("tileset/TESTWALL_RAYCAST.json")
+        self.title_map = arcade.load_tilemap("tileset/map1.json")
 
         # Then access its sprite lists
         self.wall_list = self.title_map.sprite_lists["Walls"]
+        self.floor_list = self.title_map.sprite_lists["Floor"]
 
         self.player_list = arcade.SpriteList()
 
         # Load player sprite
         self.player_sprite = Player("tileset/character.png", scale=1, hp=100, atk=10, spd=2)
-        self.player_sprite.center_x = ScreenWidth // 2
-        self.player_sprite.center_y = ScreenHeight // 2
+        self.player_sprite.center_x = 60
+        self.player_sprite.center_y = 350
         self.player_list.append(self.player_sprite)
 
         # test enemy sprite
         # Dynamically set spawn points for the monster
         spawn_x, spawn_y = 300, 400  # Example spawn location
-        self.enemy1_sprite = monster_melee("tileset/enemy1.png", scale=1, hp=100, atk=10, atk_speed=1.8, spawn_x=spawn_x, spawn_y=spawn_y)
+        self.enemy1_sprite = monster_melee("tileset/enemy1.png", scale=1, hp=100, atk=10, atk_speed=3, spawn_x=spawn_x, spawn_y=spawn_y)
         self.player_list.append(self.enemy1_sprite)
 
         self.physics_engine = arcade.PhysicsEngineSimple(self.player_sprite, self.wall_list)
@@ -68,6 +84,7 @@ class Game(arcade.Window):
         self.clear()
         self.camera_sprites.use()
         self.wall_list.draw()
+        self.floor_list.draw()
         self.player_list.draw()
         self.enemy1_sprite.draw()
 
@@ -78,9 +95,23 @@ class Game(arcade.Window):
       # Line of Sight (LOS) check
         los = arcade.has_line_of_sight((self.player_sprite.center_x, self.player_sprite.center_y),(450, 470), self.wall_list)
         arcade.draw_text(f"LOS: {los}", 10, 30, arcade.color.WHITE, 12) 
-      
+
+        # Draw pause menu if paused
+        if self.paused:
+            # Draw a semi-transparent overlay
+            arcade.draw_rectangle_filled(
+                ScreenWidth // 2, ScreenHeight // 2,
+                ScreenWidth, ScreenHeight,
+                (0, 0, 0, 150)  # Black with 150 alpha for transparency
+            )
+            arcade.draw_text("PAUSED", ScreenWidth // 2 - 50, ScreenHeight // 2, arcade.color.WHITE, 24)
+            arcade.draw_text("Press ESC to Resume", ScreenWidth // 2 - 100, ScreenHeight // 2 - 40, arcade.color.WHITE, 18)
+
     def on_update(self, delta_time):
         """UPDATE EVERYTHING"""
+        if self.paused:
+            return  # Skip updates when paused
+
         self.player_list.update()
         self.player_sprite.update()
 
@@ -101,7 +132,10 @@ class Game(arcade.Window):
 # movement here
     def on_key_press(self, key, modifiers):
         """Called when a key is pressed."""
-        self.pressed_keys.add(key)
+        if key == arcade.key.ESCAPE:
+            self.paused = not self.paused  # Toggle pause state
+        else:
+            self.pressed_keys.add(key)
 
     def on_key_release(self, key, modifiers):
         """Called when a key is released."""
@@ -164,6 +198,7 @@ class monster_melee(arcade.Sprite):
         if distance <= 15:
             # Attack the player
             player_sprite.hp -= self.atk
+
 
     
 # # class monster_ranged(hp, atk, projectile_speed):

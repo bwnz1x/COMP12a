@@ -1,5 +1,5 @@
 { "columns":4,
- "image":"..\/sprite\/sprite.png",
+ "image":"sprite.png",
  "imageheight":160,
  "imagewidth":128,
  "margin":0,
@@ -10,5 +10,5 @@
  "tileheight":32,
  "tilewidth":32,
  "type":"tileset",
- "version":1.1
+ "version":"1.10"
 }
