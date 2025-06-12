@@ -24,18 +24,36 @@ class Player(arcade.Sprite):
         self.reload_time = 2.0  # Time to reload in seconds
         self.reloading = False  # Boolean to track if reloading is in progress
 
+        self.invincible = False  # Boolean to track if the player is invincible
+
     def player_gun(self, target_x, target_y):
         """Player main weapon, a gun that shoots bullets."""
         if self.reloading:
             return  # Cannot shoot while reloading
 
         if self.ammo > 0:
-            # Calculate direction to the target
-            direction = Vec2(target_x - self.center_x, target_y - self.center_y).normalize()
+            # Transform mouse coordinates to world coordinates relative to the camera
+            camera_x, camera_y = self.window.camera_sprites.position
+            world_mouse_x = target_x + camera_x
+            world_mouse_y = target_y + camera_y
+
+            # Calculate the angle to the target using atan2
+            dx = world_mouse_x - self.center_x
+            dy = world_mouse_y - self.center_y
+            angle = math.atan2(dy, dx)
+
+            # Calculate direction vector from the angle
+            direction_x = math.cos(angle)
+            direction_y = math.sin(angle)
+
             # Create a new projectile
-            projectile = Projectile("tileset/playerprojectile.png", scale=1, speed=10, direction=(direction.x, direction.y))
+            projectile = Projectile("tileset/playerprojectile.png", scale=1, speed=10, direction=(direction_x, direction_y))
             projectile.center_x = self.center_x
             projectile.center_y = self.center_y
+
+            # Rotate the projectile to match its direction
+            projectile.angle = math.degrees(angle)
+
             # Add the projectile to the game's projectile list
             self.window.projectile_list.append(projectile)
             self.ammo -= 1  # Decrease ammo count
@@ -61,6 +79,10 @@ class Player(arcade.Sprite):
     def player_gernade(self):
         """Press a key to throw a grenade."""
         pass
+
+    def remove_invincibility(self, delta_time):
+        """Remove the player's invincibility state."""
+        self.invincible = False
 
 class Projectile(arcade.Sprite):
     def __init__(self, image, scale, speed, direction):
@@ -150,6 +172,20 @@ class Game(arcade.Window):
             arcade.draw_text("PAUSED", ScreenWidth // 2 - 50, ScreenHeight // 2, arcade.color.WHITE, 24)
             arcade.draw_text("Press ESC to Resume", ScreenWidth // 2 - 100, ScreenHeight // 2 - 40, arcade.color.WHITE, 18)
 
+        # Draw health bars for enemies
+        camera_x, camera_y = self.camera_sprites.position
+        for enemy in self.player_list:
+            if isinstance(enemy, monster_melee):
+                enemy.draw_health_bar(camera_x, camera_y)
+
+        # Draw debug HUD for projectiles
+        for i, projectile in enumerate(self.projectile_list):
+            arcade.draw_text(
+                f"Projectile {i}: ({projectile.center_x:.1f}, {projectile.center_y:.1f})",
+                10, 120 + i * 20,  # Offset each line vertically
+                arcade.color.YELLOW, 12
+            )
+
     def on_update(self, delta_time):
         """UPDATE EVERYTHING"""
         if self.paused:
@@ -167,6 +203,21 @@ class Game(arcade.Window):
 
         # Call the monster's attack method
         self.enemy1_sprite.check_line_of_sight(self.player_sprite, self.wall_list)
+
+        # Check for projectile collisions with walls and enemies
+        for projectile in self.projectile_list:
+            # Check collision with walls
+            if arcade.check_for_collision_with_list(projectile, self.wall_list):
+                projectile.remove_from_sprite_lists()
+                continue
+
+            # Check collision with enemies
+            hit_enemies = arcade.check_for_collision_with_list(projectile, self.player_list)
+            for enemy in hit_enemies:
+                if isinstance(enemy, monster_melee):  # Ensure it's an enemy
+                    enemy.hp -= self.player_sprite.atk  # Deal damage to the enemy
+                    projectile.remove_from_sprite_lists()
+                    break
 
         # Handle player movement
         self.handle_player_movement()
@@ -252,19 +303,44 @@ class monster_melee(arcade.Sprite):
         distance = math.sqrt(
             (self.center_x - player_sprite.center_x) ** 2 +
             (self.center_y - player_sprite.center_y) ** 2)
-        if distance <= 15:
+        if distance <= 15 and not player_sprite.invincible:
             # Attack the player
             player_sprite.hp -= self.atk
+
+            # Make the player temporarily invincible
+            player_sprite.invincible = True
+            arcade.schedule(player_sprite.remove_invincibility, 2.0)  # 2 seconds of invincibility
     
     def death(self):
         """Handle monster death"""
         if self.hp <= 0:
             self.remove_from_sprite_lists()
 
+    def draw_health_bar(self, camera_x, camera_y):
+        """Draw the health bar above the enemy."""
+        # Calculate screen position relative to the camera
+        screen_x = self.center_x - camera_x
+        screen_y = self.center_y - camera_y
 
+        # Calculate health bar dimensions
+        bar_width = 40
+        bar_height = 5
+        health_percentage = max(self.hp / 100, 0)  # Ensure it doesn't go below 0
+        health_bar_width = bar_width * health_percentage
 
+        # Draw the health bar background
+        arcade.draw_rectangle_filled(
+            screen_x, screen_y + 20,  # Position above the enemy
+            bar_width, bar_height,
+            arcade.color.RED
+        )
 
-
+        # Draw the current health bar
+        arcade.draw_rectangle_filled(
+            screen_x - (bar_width - health_bar_width) / 2, screen_y + 20,
+            health_bar_width, bar_height,
+            arcade.color.GREEN
+        )
     
 # # class monster_ranged(hp, atk, projectile_speed):
 #     """Find player with LOS, attack after a few seconds."""
