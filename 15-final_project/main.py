@@ -127,7 +127,7 @@ class Game(arcade.Window):
 
         self.player_list = arcade.SpriteList()
 
-        # Load player sprite
+        # Load playeraaaa sprite
         self.player_sprite = Player("tileset/character.png", scale=1.5, hp=100, atk=10, spd=2, window=self)
         self.player_sprite.center_x = 60
         self.player_sprite.center_y = 350
