@@ -19,8 +19,8 @@ class Player(arcade.Sprite):
         self.window = window  # Store a reference to the Game instance
 
         # Ammo attributes
-        self.ammo = 10  # Current ammo
-        self.max_ammo = 10  # Maximum ammo capacity
+        self.ammo = 50  # Current ammo
+        self.max_ammo = 50  # Maximum ammo capacity
         self.reload_time = 2.0  # Time to reload in seconds
         self.reloading = False  # Boolean to track if reloading is in progress
 
@@ -37,7 +37,7 @@ class Player(arcade.Sprite):
             world_mouse_x = target_x + camera_x
             world_mouse_y = target_y + camera_y
 
-            # Calculate the angle to the target using atan2
+            # Calculate the angle to the target 
             dx = world_mouse_x - self.center_x
             dy = world_mouse_y - self.center_y
             angle = math.atan2(dy, dx)
@@ -97,7 +97,7 @@ class Game(arcade.Window):
         global ScreenWidth, ScreenHeight
         ScreenWidth, ScreenHeight = arcade.get_display_size()
         super().__init__(ScreenWidth, ScreenHeight - 100, "Game Window")
-        arcade.set_background_color(arcade.color.DARK_GREEN)
+        arcade.set_background_color(arcade.color.SKY_BLUE)
 
 
         self.player_list = None
@@ -128,7 +128,7 @@ class Game(arcade.Window):
         self.player_list = arcade.SpriteList()
 
         # Load playeraaaa sprite
-        self.player_sprite = Player("tileset/character.png", scale=1.5, hp=100, atk=10, spd=2, window=self)
+        self.player_sprite = Player("tileset/character.png", scale=1.3, hp=100, atk=10, spd=2, window=self)
         self.player_sprite.center_x = 60
         self.player_sprite.center_y = 350
         self.player_list.append(self.player_sprite)
@@ -136,8 +136,14 @@ class Game(arcade.Window):
         # test enemy sprite
         # Dynamically set spawn points for the monster
         spawn_x, spawn_y = 300, 400  # Example spawn location
-        self.enemy1_sprite = monster_melee("tileset/enemy1.png", scale=1, hp=100, atk=10, atk_speed=3, spawn_x=spawn_x, spawn_y=spawn_y)
+        self.enemy1_sprite = monster_melee("tileset/enemy1.png", scale=1, hp=100, atk=10, atk_speed=1, spawn_x=spawn_x, spawn_y=spawn_y)
         self.player_list.append(self.enemy1_sprite)
+
+        # Initialize the enemy list
+        self.enemy_list = arcade.SpriteList()
+
+        # Add the test enemy sprite to the enemy list
+        self.enemy_list.append(self.enemy1_sprite)
 
         self.physics_engine = arcade.PhysicsEngineSimple(self.player_sprite, self.wall_list)
 
@@ -148,7 +154,7 @@ class Game(arcade.Window):
         self.wall_list.draw()
         self.floor_list.draw()
         self.player_list.draw()
-        self.enemy1_sprite.draw()
+        self.enemy_list.draw()  # Draw all enemies
         self.projectile_list.draw()  # Draw projectiles
 
         # Draw GUI
@@ -194,12 +200,24 @@ class Game(arcade.Window):
         self.player_list.update()
         self.player_sprite.update()
         self.projectile_list.update()  # Update projectiles
+        self.enemy_list.update()  # Update all enemies
 
-        # Remove projectiles that go off-screen
+        # Optimize projectile management by removing off-screen projectiles immediately
         for projectile in self.projectile_list:
-            if (projectile.center_x < 0 or projectile.center_x > ScreenWidth or
-                projectile.center_y < 0 or projectile.center_y > ScreenHeight):
+            if not (0 <= projectile.center_x <= ScreenWidth and 0 <= projectile.center_y <= ScreenHeight):
                 projectile.remove_from_sprite_lists()
+
+        # Optimize enemy updates by only updating enemies near the player
+        player_x, player_y = self.player_sprite.center_x, self.player_sprite.center_y
+        for enemy in self.enemy_list:
+            if abs(enemy.center_x - player_x) < 300 and abs(enemy.center_y - player_y) < 300:  # Adjust range as needed
+                enemy.update()
+
+        # Optimize health bar rendering by only drawing health bars for visible enemies
+        camera_x, camera_y = self.camera_sprites.position
+        for enemy in self.enemy_list:
+            if 0 <= enemy.center_x - camera_x <= ScreenWidth and 0 <= enemy.center_y - camera_y <= ScreenHeight:
+                enemy.draw_health_bar(camera_x, camera_y)
 
         # Call the monster's attack method
         self.enemy1_sprite.check_line_of_sight(self.player_sprite, self.wall_list)
@@ -212,7 +230,7 @@ class Game(arcade.Window):
                 continue
 
             # Check collision with enemies
-            hit_enemies = arcade.check_for_collision_with_list(projectile, self.player_list)
+            hit_enemies = arcade.check_for_collision_with_list(projectile, self.enemy_list)
             for enemy in hit_enemies:
                 if isinstance(enemy, monster_melee):  # Ensure it's an enemy
                     enemy.hp -= self.player_sprite.atk  # Deal damage to the enemy
@@ -226,6 +244,12 @@ class Game(arcade.Window):
         self.physics_engine.update()
         self.scroll_to_player()
 
+        # Check all enemies for death
+        for enemy in self.enemy_list:
+            if enemy.hp <= 0:
+                enemy.remove_from_sprite_lists()
+
+        
     def on_mouse_press(self, x, y, button, modifiers):
         """Called when the mouse is pressed."""
         if button == arcade.MOUSE_BUTTON_LEFT:
@@ -251,16 +275,16 @@ class Game(arcade.Window):
 
     def handle_player_movement(self):
         """Handle player movement based on key presses."""
-        if arcade.key.LEFT in self.pressed_keys:
+        if arcade.key.A in self.pressed_keys:
             self.player_sprite.change_x = self.player_sprite.spd * -1
-        elif arcade.key.RIGHT in self.pressed_keys:
+        elif arcade.key.D in self.pressed_keys:
             self.player_sprite.change_x = self.player_sprite.spd
         else:
             self.player_sprite.change_x = 0
 
-        if arcade.key.UP in self.pressed_keys:
+        if arcade.key.W in self.pressed_keys:
             self.player_sprite.change_y = self.player_sprite.spd
-        elif arcade.key.DOWN in self.pressed_keys:
+        elif arcade.key.S in self.pressed_keys:
             self.player_sprite.change_y = self.player_sprite.spd * -1
         else:
             self.player_sprite.change_y = 0
@@ -311,10 +335,6 @@ class monster_melee(arcade.Sprite):
             player_sprite.invincible = True
             arcade.schedule(player_sprite.remove_invincibility, 2.0)  # 2 seconds of invincibility
     
-    def death(self):
-        """Handle monster death"""
-        if self.hp <= 0:
-            self.remove_from_sprite_lists()
 
     def draw_health_bar(self, camera_x, camera_y):
         """Draw the health bar above the enemy."""
