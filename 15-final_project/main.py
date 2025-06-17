@@ -129,7 +129,7 @@ class Game(arcade.Window):
 
         # Load playeraaaa sprite
         self.player_sprite = Player("tileset/character.png", scale=1.3, hp=100, atk=10, spd=2, window=self)
-        self.player_sprite.center_x = 60
+        self.player_sprite.center_x = 90
         self.player_sprite.center_y = 350
         self.player_list.append(self.player_sprite)
 
@@ -151,8 +151,8 @@ class Game(arcade.Window):
         """DRAW EVERYTHING"""
         self.clear()
         self.camera_sprites.use()
-        self.wall_list.draw()
         self.floor_list.draw()
+        self.wall_list.draw()
         self.player_list.draw()
         self.enemy_list.draw()  # Draw all enemies
         self.projectile_list.draw()  # Draw projectiles
@@ -192,6 +192,44 @@ class Game(arcade.Window):
                 arcade.color.YELLOW, 12
             )
 
+        # Draw player health bar on the HUD
+        bar_width = 200
+        bar_height = 20
+        health_percentage = max(self.player_sprite.hp / 100, 0)  # Ensure it doesn't go below 0
+        health_bar_width = bar_width * health_percentage
+
+        # Adjust health bar position to ensure visibility
+        hud_x = 100
+        hud_y = 60  # Move it slightly lower to avoid potential overlap with the screen edge
+
+        # Draw the health bar background
+        arcade.draw_rectangle_filled(
+            hud_x, hud_y,  # Updated position
+            bar_width, bar_height,
+            arcade.color.RED
+        )
+
+        # Draw the current health bar
+        arcade.draw_rectangle_filled(
+            hud_x - (bar_width - health_bar_width) / 2, hud_y,
+            health_bar_width, bar_height,
+            arcade.color.GREEN
+        )
+
+        # Draw a black outline for the health bar
+        outline_width = 2
+        arcade.draw_rectangle_outline(
+            hud_x, hud_y,  # Position of the outline
+            bar_width, bar_height,
+            arcade.color.BLACK, outline_width
+        )
+
+        # Draw the health value as text
+        arcade.draw_text(
+            f"{self.player_sprite.hp}/100", hud_x, hud_y - 10,  # Adjust text position
+            arcade.color.WHITE, 14, anchor_x="center"
+        )
+
     def on_update(self, delta_time):
         """UPDATE EVERYTHING"""
         if self.paused:
@@ -212,6 +250,12 @@ class Game(arcade.Window):
         for enemy in self.enemy_list:
             if abs(enemy.center_x - player_x) < 300 and abs(enemy.center_y - player_y) < 300:  # Adjust range as needed
                 enemy.update()
+
+        # Ensure only active enemies are processed
+        for enemy in self.enemy_list:
+            if enemy.hp > 0:
+                enemy.update()
+                enemy.check_line_of_sight(self.player_sprite, self.wall_list)
 
         # Optimize health bar rendering by only drawing health bars for visible enemies
         camera_x, camera_y = self.camera_sprites.position
@@ -248,6 +292,8 @@ class Game(arcade.Window):
         for enemy in self.enemy_list:
             if enemy.hp <= 0:
                 enemy.remove_from_sprite_lists()
+                # Ensure the enemy is completely removed from all lists
+                
 
         
     def on_mouse_press(self, x, y, button, modifiers):
