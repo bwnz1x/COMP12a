@@ -127,13 +127,9 @@ class Projectile(arcade.Sprite):
         self.change_x = direction[0] * speed
         self.change_y = direction[1] * speed
 
-class Game(arcade.Window):
+class Game(arcade.View):
     def __init__(self):
-        # Dynamically get the monitor's resolution
-        global ScreenWidth, ScreenHeight
-        ScreenWidth, ScreenHeight = arcade.get_display_size()
-        super().__init__(ScreenWidth, ScreenHeight - 100, "Game Window")
-        arcade.set_background_color(arcade.color.SKY_BLUE)
+        super().__init__()
 
         self.player_list = None
         self.enemy_list = None
@@ -141,9 +137,6 @@ class Game(arcade.Window):
         self.wall_list = None
         self.title_list = None
         self.title_map = None
-
-        self.camera_sprites = arcade.Camera(ScreenWidth, ScreenHeight)
-        self.camera_gui = arcade.Camera(ScreenWidth, ScreenHeight)
 
         # Add a set to track pressed keys
         self.pressed_keys = set()
@@ -165,8 +158,9 @@ class Game(arcade.Window):
         self.boss_spawned = False
         self.boss_sprite = None
 
-        # Game over state
+        # Game over and win state
         self.game_over = False
+        self.game_win = False
         self.restart_requested = False
 
         self.money = 500  # Start with 500 money
@@ -213,6 +207,12 @@ class Game(arcade.Window):
         
         self.physics_engine = arcade.PhysicsEngineSimple(self.player_sprite, self.wall_list)
 
+    def on_show_view(self):
+        arcade.set_background_color((45, 188, 227))
+        # Recreate cameras for this view
+        self.camera_sprites = arcade.Camera(ScreenWidth, ScreenHeight)
+        self.camera_gui = arcade.Camera(ScreenWidth, ScreenHeight)
+
     def on_draw(self):
         """DRAW EVERYTHING"""
         self.clear()
@@ -229,13 +229,13 @@ class Game(arcade.Window):
         self.camera_gui.use()
         arcade.draw_text("Player Position: " + str(self.player_sprite.position), 10, 10, arcade.color.WHITE, 12)
         # arcade.draw_text(f"Player HP: {self.player_sprite.hp}", 10, 50, arcade.color.WHITE, 12)
-        arcade.draw_text(f"Ammo: {self.player_sprite.ammo}/{self.player_sprite.max_ammo}", 10, 70, arcade.color.WHITE, 12)
+        # arcade.draw_text(f"Ammo: {self.player_sprite.ammo}/{self.player_sprite.max_ammo}", 10, 70, arcade.color.WHITE, 12)
         if self.player_sprite.ammo == 0 and not self.player_sprite.reloading:
             arcade.draw_text("Out of Ammo! Press R to Reload", 10, 100, arcade.color.RED, 12)
         if self.player_sprite.reloading:
             arcade.draw_text("Reloading...", 10, 90, arcade.color.RED, 12)
         # Draw money counter on HUD
-        arcade.draw_text(f"Money: {self.money}", 10, 100, arcade.color.GOLD, 18)
+        arcade.draw_text(f"Money: {self.money}", 10, 150, arcade.color.GOLD, 18)
 
         # Draw pause menu if paused
         if self.paused:
@@ -268,22 +268,31 @@ class Game(arcade.Window):
                 arcade.color.YELLOW, 12
             )
 
-        # Dash bar and HP bar in original simple HUD style
-        bar_width = 100
+        # HP, Dash, and Ammo bars cluster (shifted up and left)
+        hud_x = 75
+        hud_y = 250  # 50 (original) + 200 (shift up)
+        bar_width = 150
         bar_height = 20
         # HP bar
-        arcade.draw_rectangle_filled(350, 50, bar_width, bar_height, arcade.color.RED)
+        arcade.draw_rectangle_filled(hud_x, hud_y, bar_width, bar_height, arcade.color.RED)
         health_percentage = max(self.player_sprite.hp / 100, 0)
         health_bar_width = bar_width * health_percentage
-        arcade.draw_rectangle_filled(350 - (bar_width - health_bar_width) / 2, 50, health_bar_width, bar_height, arcade.color.GREEN)
-        arcade.draw_rectangle_outline(350, 50, bar_width, bar_height, arcade.color.BLACK, 2)
-        arcade.draw_text(f"{self.player_sprite.hp}/100", 350, 40, arcade.color.WHITE, 14, anchor_x="center")
+        arcade.draw_rectangle_filled(hud_x - (bar_width - health_bar_width) / 2, hud_y, health_bar_width, bar_height, arcade.color.GREEN)
+        arcade.draw_rectangle_outline(hud_x, hud_y, bar_width, bar_height, arcade.color.BLACK, 2)
+        arcade.draw_text(f"{self.player_sprite.hp}/100", hud_x, hud_y - 10, arcade.color.WHITE, 14, anchor_x="center")
         # Dash bar just below
         dash_color = arcade.color.GREEN if self.dash_cooldown == 0 else arcade.color.GRAY
         dash_text = "Ready" if self.dash_cooldown == 0 else f"{self.dash_cooldown:.1f}s"
-        arcade.draw_rectangle_filled(350, 25, bar_width, bar_height, dash_color)
-        arcade.draw_rectangle_outline(350, 25, bar_width, bar_height, arcade.color.BLACK, 2)
-        arcade.draw_text(f"Dash: {dash_text}", 350, 15, arcade.color.WHITE, 14, anchor_x="center")
+        arcade.draw_rectangle_filled(hud_x, hud_y - 25, bar_width, bar_height, dash_color)
+        arcade.draw_rectangle_outline(hud_x, hud_y - 25, bar_width, bar_height, arcade.color.BLACK, 2)
+        arcade.draw_text(f"Dash: {dash_text}", hud_x, hud_y - 35, arcade.color.WHITE, 14, anchor_x="center")
+        # Ammo bar just below dash bar
+        ammo_percentage = max(self.player_sprite.ammo / self.player_sprite.max_ammo, 0)
+        ammo_bar_width = bar_width * ammo_percentage
+        arcade.draw_rectangle_filled(hud_x - (bar_width - ammo_bar_width) / 2, hud_y - 50, ammo_bar_width, bar_height, arcade.color.BLUE)
+        arcade.draw_rectangle_filled(hud_x, hud_y - 50, bar_width, bar_height, arcade.color.DARK_BLUE, 0.2)
+        arcade.draw_rectangle_outline(hud_x, hud_y - 50, bar_width, bar_height, arcade.color.BLACK, 2)
+        arcade.draw_text(f"Ammo: {self.player_sprite.ammo}/{self.player_sprite.max_ammo}", hud_x, hud_y - 60, arcade.color.WHITE, 14, anchor_x="center")
 
         # Game over screen
         if self.game_over:
@@ -294,12 +303,21 @@ class Game(arcade.Window):
                 (0, 0, 0, 200)
             )
             arcade.draw_text("GAME OVER", ScreenWidth // 2, ScreenHeight // 2 + 20, arcade.color.RED, 40, anchor_x="center")
-            arcade.draw_text("Press 9 to Restart", ScreenWidth // 2, ScreenHeight // 2 - 40, arcade.color.WHITE, 20, anchor_x="center")
-            arcade.draw_text("Press ESC to Quit", ScreenWidth // 2, ScreenHeight // 2 - 80, arcade.color.WHITE, 20, anchor_x="center")
+            arcade.draw_text("Press ESC to Quit", ScreenWidth // 2, ScreenHeight // 2 - 40, arcade.color.WHITE, 20, anchor_x="center")
+
+        # Win screen
+        if hasattr(self, 'game_win') and self.game_win:
+            arcade.draw_rectangle_filled(
+                ScreenWidth // 2, ScreenHeight // 2,
+                ScreenWidth, ScreenHeight,
+                (0, 0, 0, 200)  # Gray and translucent, matches pause/lose
+            )
+            arcade.draw_text("YOU WIN!", ScreenWidth // 2, ScreenHeight // 2 + 20, arcade.color.GREEN, 40, anchor_x="center")
+            arcade.draw_text("Press ESC to Quit", ScreenWidth // 2, ScreenHeight // 2 - 40, arcade.color.WHITE, 20, anchor_x="center")
 
     def on_update(self, delta_time):
         """UPDATE EVERYTHING"""
-        if self.paused or self.game_over:
+        if self.paused or self.game_over or self.game_win:
             return  # Skip updates when paused or game is over
 
         self.player_list.update()
@@ -337,7 +355,11 @@ class Game(arcade.Window):
         # Check for projectile collisions with walls and enemies
         for projectile in self.projectile_list:
             # Check collision with walls
-            if arcade.check_for_collision_with_list(projectile, self.wall_list):
+            hit_walls = arcade.check_for_collision_with_list(projectile, self.wall_list)
+            if hit_walls:
+                print(f"Projectile at ({projectile.center_x:.1f}, {projectile.center_y:.1f}) collided with wall(s):")
+                for wall in hit_walls:
+                    print(f"  Wall at ({wall.center_x:.1f}, {wall.center_y:.1f})")
                 projectile.remove_from_sprite_lists()
                 continue
 
@@ -358,7 +380,7 @@ class Game(arcade.Window):
         # Check for collision with portal
         portal_hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.portal_list)
         if portal_hit_list:
-            self.load_level2()
+            self.game_win = True
             return
 
         # Handle player movement
@@ -450,20 +472,21 @@ class Game(arcade.Window):
                 self.dash_cooldown = self.dash_cooldown_max
 
     def scroll_to_player(self):
-        position = Vec2(self.player_sprite.center_x - self.width / 2,
-                        self.player_sprite.center_y - self.height / 2)
+        window_width, window_height = self.window.get_size()
+        position = Vec2(self.player_sprite.center_x - window_width / 2,
+                        self.player_sprite.center_y - window_height / 2)
         self.camera_sprites.move_to(position, CameraSpeed)
 # movement here
     def on_key_press(self, key, modifiers):
         """Called when a key is pressed."""
         if key == arcade.key.ESCAPE:
-            if self.game_over:
-                arcade.close_window()  # Quit the game if on game over screen
+            if self.game_over or (hasattr(self, 'game_win') and self.game_win):
+                arcade.close_window()  # Quit the game if on game over or win screen
             else:
                 self.paused = not self.paused  # Toggle pause state
         elif key == arcade.key.R:
             if self.game_over:
-                self.restart_requested = True  # Set restart requested flag
+                pass  # No longer restart on R
             else:
                 self.player_sprite.reload()  # Trigger reload
         elif key == arcade.key.I:
@@ -655,11 +678,41 @@ class monster_boss(arcade.Sprite):
         self.portal_list = arcade.SpriteList()
         self.physics_engine = arcade.PhysicsEngineSimple(self.player_sprite, self.wall_list)
 
-def main():
-    window = Game()
-    window.setup()
-    arcade.run()  
+class StartScreen(arcade.View):
+    def on_show_view(self):
+        arcade.set_background_color((45, 188, 227))
 
+    def on_draw(self):
+        arcade.start_render()
+        arcade.draw_text(
+            "BEN'S UNNAMMED GAME",
+            ScreenWidth // 2, ScreenHeight // 2 + 100,
+            arcade.color.WHITE, 40, anchor_x="center"
+        )
+
+        # Draw start button
+        btn_x = ScreenWidth // 2
+        btn_y = ScreenHeight // 2 - 40
+        btn_w = 200
+        btn_h = 60
+        arcade.draw_rectangle_filled(btn_x, btn_y, btn_w, btn_h, arcade.color.GREEN)
+        arcade.draw_text("START", btn_x, btn_y - 15, arcade.color.BLACK, 28, anchor_x="center")
+
+    def on_mouse_press(self, x, y, button, modifiers):
+        btn_x = ScreenWidth // 2
+        btn_y = ScreenHeight // 2 - 40
+        btn_w = 200
+        btn_h = 60
+        if btn_x - btn_w // 2 <= x <= btn_x + btn_w // 2 and btn_y - btn_h // 2 <= y <= btn_y + btn_h // 2:
+            game = Game()
+            game.setup()
+            self.window.show_view(game)
+
+def main():
+    window = arcade.Window(ScreenWidth, ScreenHeight - 100, "Game Window")
+    start_view = StartScreen()
+    window.show_view(start_view)
+    arcade.run()
 
 if __name__ == "__main__":
     main()
