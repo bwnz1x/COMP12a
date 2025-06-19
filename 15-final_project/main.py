@@ -98,7 +98,8 @@ class Game(arcade.Window):
         ScreenWidth, ScreenHeight = arcade.get_display_size()
         super().__init__(ScreenWidth, ScreenHeight - 100, "Game Window")
         arcade.set_background_color(arcade.color.SKY_BLUE)
-
+        # Cap the game at 60 FPS
+        arcade.set_update_rate(1/60)
 
         self.player_list = None
         self.enemy_list = None
@@ -137,8 +138,8 @@ class Game(arcade.Window):
     def setup(self):
         """LOAD MAPS AND SPRITES"""
 
-        # Load the tile map first
-        self.title_map = arcade.load_tilemap("15-final_project/tileset/map1.json")
+        # Load the tile map first with spatial hashing enabled
+        self.title_map = arcade.load_tilemap("15-final_project/tileset/map1.json",use_spatial_hash=True)
 
         # Then access its sprite lists
         self.wall_list = self.title_map.sprite_lists["Walls"]
@@ -167,7 +168,7 @@ class Game(arcade.Window):
         # Health refill sprite list
         self.health_refill_list = arcade.SpriteList()
         # Example: Place a health refill at (400, 400)
-        health_refill = arcade.Sprite("tileset/Health1.png", scale=1)
+        health_refill = arcade.Sprite("15-final_project/tileset/Health1.png", scale=1)
         health_refill.center_x = 400
         health_refill.center_y = 400
         self.health_refill_list.append(health_refill)
@@ -345,7 +346,7 @@ class Game(arcade.Window):
                 
         # Spawn boss only when player passes x=1205 and enemy1 is dead
         if not self.boss_spawned and self.player_sprite.center_x > 1205 and self.enemy1_sprite.hp <= 0:
-            self.boss_sprite = monster_boss("tileset/BOSS.png", scale=1, hp=600, atk=25, atk_speed=1.5, spawn_x=1512, spawn_y=763)
+            self.boss_sprite = monster_boss("15-final_project/tileset/BOSS.png", scale=1, hp=600, atk=25, atk_speed=1.5, spawn_x=1512, spawn_y=763)
             self.enemy_list.append(self.boss_sprite)
             self.boss_spawned = True
 
@@ -564,7 +565,7 @@ class monster_boss(arcade.Sprite):
 def main():
     window = Game()
     window.setup()
-    arcade.run()
+    arcade.run(update_rate=1/60)
 
 
 if __name__ == "__main__":
