@@ -98,8 +98,6 @@ class Game(arcade.Window):
         ScreenWidth, ScreenHeight = arcade.get_display_size()
         super().__init__(ScreenWidth, ScreenHeight - 100, "Game Window")
         arcade.set_background_color(arcade.color.SKY_BLUE)
-        # Cap the game at 60 FPS
-        arcade.set_update_rate(1/60)
 
         self.player_list = None
         self.enemy_list = None
@@ -565,7 +563,7 @@ class monster_boss(arcade.Sprite):
 def main():
     window = Game()
     window.setup()
-    arcade.run(update_rate=1/60)
+    arcade.run()  
 
 
 if __name__ == "__main__":
