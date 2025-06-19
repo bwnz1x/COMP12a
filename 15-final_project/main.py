@@ -47,7 +47,7 @@ class Player(arcade.Sprite):
             direction_y = math.sin(angle)
 
             # Create a new projectile
-            projectile = Projectile("tileset/playerprojectile.png", scale=1, speed=10, direction=(direction_x, direction_y))
+            projectile = Projectile("15-final_project/tileset/playerprojectile.png", scale=1, speed=10, direction=(direction_x, direction_y))
             projectile.center_x = self.center_x
             projectile.center_y = self.center_y
 
@@ -119,7 +119,7 @@ class Game(arcade.Window):
         """LOAD MAPS AND SPRITES"""
 
         # Load the tile map first
-        self.title_map = arcade.load_tilemap("tileset/map1.json")
+        self.title_map = arcade.load_tilemap("15-final_project/tileset/map1.json")
 
         # Then access its sprite lists
         self.wall_list = self.title_map.sprite_lists["Walls"]
@@ -128,7 +128,7 @@ class Game(arcade.Window):
         self.player_list = arcade.SpriteList()
 
         # Load playeraaaa sprite
-        self.player_sprite = Player("tileset/character.png", scale=1.3, hp=100, atk=10, spd=2, window=self)
+        self.player_sprite = Player("15-final_project/tileset/character.png", scale=1.3, hp=100, atk=10, spd=2, window=self)
         self.player_sprite.center_x = 90
         self.player_sprite.center_y = 350
         self.player_list.append(self.player_sprite)
@@ -136,7 +136,7 @@ class Game(arcade.Window):
         # test enemy sprite
         # Dynamically set spawn points for the monster
         spawn_x, spawn_y = 300, 400  # Example spawn location
-        self.enemy1_sprite = monster_melee("tileset/enemy1.png", scale=1, hp=100, atk=10, atk_speed=1, spawn_x=spawn_x, spawn_y=spawn_y)
+        self.enemy1_sprite = monster_melee("15-final_project/tileset/enemy1.png", scale=1, hp=100, atk=10, atk_speed=1, spawn_x=spawn_x, spawn_y=spawn_y)
         self.player_list.append(self.enemy1_sprite)
 
         # Initialize the enemy list
