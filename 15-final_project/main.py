@@ -30,7 +30,7 @@ class Player(arcade.AnimatedTimeBasedSprite):
 
     def load_idle_frames(self):
         self.frames.clear()
-        texture = arcade.load_texture("15-final_project/tileset/sprite.png", 0, 0, 32, 32)
+        texture = arcade.load_texture("tileset/sprite.png", 0, 0, 32, 32)
         anim = arcade.AnimationKeyframe(0, 250, texture)
         self.frames.append(anim)
         self.texture = texture  # Ensure texture is set for collisions
@@ -49,7 +49,7 @@ class Player(arcade.AnimatedTimeBasedSprite):
         else:
             y = 0
         for i in range(4):
-            texture = arcade.load_texture("15-final_project/tileset/sprite.png", i * 32, y, 32, 32)
+            texture = arcade.load_texture("tileset/sprite.png", i * 32, y, 32, 32)
             anim = arcade.AnimationKeyframe(i, 150, texture)
             self.frames.append(anim)
         if self.frames:
@@ -77,7 +77,7 @@ class Player(arcade.AnimatedTimeBasedSprite):
             direction_y = math.sin(angle)
 
             # Create a new projectile
-            projectile = Projectile("15-final_project/tileset/playerprojectile.png", scale=1, speed=10, direction=(direction_x, direction_y))
+            projectile = Projectile("tileset/playerprojectile.png", scale=1, speed=10, direction=(direction_x, direction_y))
             projectile.center_x = self.center_x
             projectile.center_y = self.center_y
 
@@ -175,7 +175,7 @@ class Game(arcade.Window):
         """LOAD MAPS AND SPRITES"""
 
         # Load the tile map first with spatial hashing enabled
-        self.title_map = arcade.load_tilemap("15-final_project/tileset/map1.json",use_spatial_hash=True)
+        self.title_map = arcade.load_tilemap("tileset/map1.json", use_spatial_hash=True)
 
         # Then access its sprite lists
         self.wall_list = self.title_map.sprite_lists["Walls"]
@@ -183,7 +183,7 @@ class Game(arcade.Window):
 
         self.player_list = arcade.SpriteList()
         # Use the animated player sprite
-        self.player_sprite = Player("15-final_project/tileset/sprite.png", scale=1.3, hp=100, atk=10, spd=3, window=self)
+        self.player_sprite = Player("tileset/sprite.png", scale=1.3, hp=100, atk=10, spd=3, window=self)
         self.player_sprite.center_x = 90
         self.player_sprite.center_y = 350
         self.player_list.append(self.player_sprite)
@@ -191,7 +191,7 @@ class Game(arcade.Window):
         # test enemy sprite
         # Dynamically set spawn points for the monster
         spawn_x, spawn_y = 300, 400  # Example spawn location
-        self.enemy1_sprite = monster_melee("15-final_project/tileset/enemy1.png", scale=1, hp=100, atk=10, atk_speed=1, spawn_x=spawn_x, spawn_y=spawn_y)
+        self.enemy1_sprite = monster_melee("tileset/enemy1.png", scale=1, hp=100, atk=10, atk_speed=1, spawn_x=spawn_x, spawn_y=spawn_y)
         self.player_list.append(self.enemy1_sprite)
 
         # Initialize the enemy list
@@ -203,7 +203,7 @@ class Game(arcade.Window):
         # Health refill sprite list
         self.health_refill_list = arcade.SpriteList()
         # Example: Place a health refill at (400, 400)
-        health_refill = arcade.Sprite("15-final_project/tileset/Health1.png", scale=1)
+        health_refill = arcade.Sprite("tileset/Health1.png", scale=1)
         health_refill.center_x = 400
         health_refill.center_y = 400
         self.health_refill_list.append(health_refill)
@@ -373,7 +373,7 @@ class Game(arcade.Window):
             if enemy.hp <= 0:
                 # If the boss dies, spawn the portal
                 if isinstance(enemy, monster_boss):
-                    portal = arcade.Sprite("15-final_project/tileset/portal.png", scale=1)
+                    portal = arcade.Sprite("tileset/portal.png", scale=1)
                     portal.center_x = 1501
                     portal.center_y = 770
                     self.portal_list.append(portal)
@@ -401,7 +401,7 @@ class Game(arcade.Window):
                 
         # Spawn boss only when player passes x=1205 and enemy1 is dead
         if not self.boss_spawned and self.player_sprite.center_x > 1205 and self.enemy1_sprite.hp <= 0:
-            self.boss_sprite = monster_boss("15-final_project/tileset/BOSS.png", scale=1, hp=600, atk=25, atk_speed=1.5, spawn_x=1512, spawn_y=763)
+            self.boss_sprite = monster_boss("tileset/BOSS.png", scale=1, hp=600, atk=25, atk_speed=1.5, spawn_x=1512, spawn_y=763)
             self.enemy_list.append(self.boss_sprite)
             self.boss_spawned = True
 
@@ -645,7 +645,7 @@ class monster_boss(arcade.Sprite):
     
     def load_level2(self):
         """Load Level 2: change map and reset player position."""
-        self.title_map = arcade.load_tilemap("15-final_project/tileset/map2.json", use_spatial_hash=True)
+        self.title_map = arcade.load_tilemap("tileset/map2.json", use_spatial_hash=True)
         self.wall_list = self.title_map.sprite_lists["Walls"]
         self.floor_list = self.title_map.sprite_lists["Floor"]
         self.player_sprite.center_x = 100
