@@ -10,9 +10,9 @@ tile_size = 32
 CameraSpeed = 0.1
 
 # class for processing player sprite
-class Player(arcade.Sprite):
+class Player(arcade.AnimatedTimeBasedSprite):
     def __init__(self, image, scale, hp, atk, spd, window):
-        super().__init__(image, scale)
+        super().__init__()
         self.hp = hp
         self.atk = atk
         self.spd = spd
@@ -25,6 +25,36 @@ class Player(arcade.Sprite):
         self.reloading = False  # Boolean to track if reloading is in progress
 
         self.invincible = False  # Boolean to track if the player is invincible
+        self.scale = scale
+        self.load_idle_frames()
+
+    def load_idle_frames(self):
+        self.frames.clear()
+        texture = arcade.load_texture("15-final_project/tileset/sprite.png", 0, 0, 32, 32)
+        anim = arcade.AnimationKeyframe(0, 250, texture)
+        self.frames.append(anim)
+        self.texture = texture  # Ensure texture is set for collisions
+        self.cur_frame_idx = 0  # Reset frame index
+
+    def set_direction_frames(self, direction):
+        self.frames.clear()
+        if direction == "up":
+            y = 32
+        elif direction == "down":
+            y = 0
+        elif direction == "left":
+            y = 64
+        elif direction == "right":
+            y = 96
+        else:
+            y = 0
+        for i in range(4):
+            texture = arcade.load_texture("15-final_project/tileset/sprite.png", i * 32, y, 32, 32)
+            anim = arcade.AnimationKeyframe(i, 150, texture)
+            self.frames.append(anim)
+        if self.frames:
+            self.texture = self.frames[0].texture  # Ensure texture is set for collisions
+        self.cur_frame_idx = 0  # Reset frame index
 
     def player_gun(self, target_x, target_y):
         """Player main weapon, a gun that shoots bullets."""
@@ -84,6 +114,12 @@ class Player(arcade.Sprite):
         """Remove the player's invincibility state."""
         self.invincible = False
 
+    def update_animation(self, delta_time: float = 1/60):
+        if self.frames:
+            super().update_animation(delta_time)
+        else:
+            self.load_idle_frames()
+
 class Projectile(arcade.Sprite):
     def __init__(self, image, scale, speed, direction):
         super().__init__(image, scale)
@@ -133,6 +169,8 @@ class Game(arcade.Window):
         self.game_over = False
         self.restart_requested = False
 
+        self.money = 500  # Start with 500 money
+
     def setup(self):
         """LOAD MAPS AND SPRITES"""
 
@@ -144,9 +182,8 @@ class Game(arcade.Window):
         self.floor_list = self.title_map.sprite_lists["Floor"]
 
         self.player_list = arcade.SpriteList()
-
-        # Load playeraaaa sprite
-        self.player_sprite = Player("15-final_project/tileset/character.png", scale=1.3, hp=100, atk=10, spd=2, window=self)
+        # Use the animated player sprite
+        self.player_sprite = Player("15-final_project/tileset/sprite.png", scale=1.3, hp=100, atk=10, spd=3, window=self)
         self.player_sprite.center_x = 90
         self.player_sprite.center_y = 350
         self.player_list.append(self.player_sprite)
@@ -170,6 +207,10 @@ class Game(arcade.Window):
         health_refill.center_x = 400
         health_refill.center_y = 400
         self.health_refill_list.append(health_refill)
+        
+        # Portal sprite list (empty at start, will spawn after boss dies)
+        self.portal_list = arcade.SpriteList()
+        
         self.physics_engine = arcade.PhysicsEngineSimple(self.player_sprite, self.wall_list)
 
     def on_draw(self):
@@ -182,6 +223,7 @@ class Game(arcade.Window):
         self.enemy_list.draw()  # Draw all enemies
         self.projectile_list.draw()  # Draw projectiles
         self.health_refill_list.draw()  # Draw health refills
+        self.portal_list.draw()  # Draw portals
 
         # Draw GUI
         self.camera_gui.use()
@@ -192,6 +234,8 @@ class Game(arcade.Window):
             arcade.draw_text("Out of Ammo! Press R to Reload", 10, 100, arcade.color.RED, 12)
         if self.player_sprite.reloading:
             arcade.draw_text("Reloading...", 10, 90, arcade.color.RED, 12)
+        # Draw money counter on HUD
+        arcade.draw_text(f"Money: {self.money}", 10, 100, arcade.color.GOLD, 18)
 
         # Draw pause menu if paused
         if self.paused:
@@ -259,7 +303,7 @@ class Game(arcade.Window):
             return  # Skip updates when paused or game is over
 
         self.player_list.update()
-        self.player_sprite.update()
+        self.player_list.update_animation(delta_time)
         self.projectile_list.update()  # Update projectiles
         self.enemy_list.update()  # Update all enemies
 
@@ -311,6 +355,12 @@ class Game(arcade.Window):
             self.player_sprite.hp = min(self.player_sprite.hp + 50, 100)  # Heal up to max 100
             health.remove_from_sprite_lists()
 
+        # Check for collision with portal
+        portal_hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.portal_list)
+        if portal_hit_list:
+            self.load_level2()
+            return
+
         # Handle player movement
         self.handle_player_movement()
 
@@ -321,6 +371,13 @@ class Game(arcade.Window):
         # Check all enemies for death
         for enemy in self.enemy_list:
             if enemy.hp <= 0:
+                # If the boss dies, spawn the portal
+                if isinstance(enemy, monster_boss):
+                    portal = arcade.Sprite("15-final_project/tileset/portal.png", scale=1)
+                    portal.center_x = 1501
+                    portal.center_y = 770
+                    self.portal_list.append(portal)
+                self.money += 500  # Add 500 money per kill
                 enemy.remove_from_sprite_lists()
                 # Ensure the enemy is completely removed from all lists
                 
@@ -409,12 +466,39 @@ class Game(arcade.Window):
                 self.restart_requested = True  # Set restart requested flag
             else:
                 self.player_sprite.reload()  # Trigger reload
+        elif key == arcade.key.I:
+            self.money += 10000  # Cheat key for money
         else:
             self.pressed_keys.add(key)
+            # Set animation frames for movement
+            if key == arcade.key.W:
+                self.player_sprite.set_direction_frames("up")
+                self.player_sprite.change_y = self.player_sprite.spd
+            elif key == arcade.key.S:
+                self.player_sprite.set_direction_frames("down")
+                self.player_sprite.change_y = -self.player_sprite.spd
+            elif key == arcade.key.A:
+                self.player_sprite.set_direction_frames("left")
+                self.player_sprite.change_x = -self.player_sprite.spd
+            elif key == arcade.key.D:
+                self.player_sprite.set_direction_frames("right")
+                self.player_sprite.change_x = self.player_sprite.spd
+            # Instantly kill the boss with key 'K'
+            elif key == arcade.key.K:
+                for enemy in self.enemy_list:
+                    if isinstance(enemy, monster_boss):
+                        enemy.hp = 0
 
     def on_key_release(self, key, modifiers):
         """Called when a key is released."""
         self.pressed_keys.discard(key)
+        # Stop movement and set idle frame
+        if key == arcade.key.W or key == arcade.key.S:
+            self.player_sprite.change_y = 0
+            self.player_sprite.load_idle_frames()
+        if key == arcade.key.A or key == arcade.key.D:
+            self.player_sprite.change_x = 0
+            self.player_sprite.load_idle_frames()
 
     def handle_player_movement(self):
         """Handle player movement based on key presses."""
@@ -559,6 +643,17 @@ class monster_boss(arcade.Sprite):
             arcade.color.GREEN
         )
     
+    def load_level2(self):
+        """Load Level 2: change map and reset player position."""
+        self.title_map = arcade.load_tilemap("15-final_project/tileset/map2.json", use_spatial_hash=True)
+        self.wall_list = self.title_map.sprite_lists["Walls"]
+        self.floor_list = self.title_map.sprite_lists["Floor"]
+        self.player_sprite.center_x = 100
+        self.player_sprite.center_y = 100
+        self.enemy_list = arcade.SpriteList()
+        self.projectile_list = arcade.SpriteList()
+        self.portal_list = arcade.SpriteList()
+        self.physics_engine = arcade.PhysicsEngineSimple(self.player_sprite, self.wall_list)
 
 def main():
     window = Game()
